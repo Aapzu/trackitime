@@ -15,8 +15,7 @@
 
                             <div class="inner">
                                 <h4><%= project.name %></h4>
-
-                                <p><%= project.totalTimeUsed != null ? moment.duration(project.totalTimeUsed).humanize() : "no time"%> used</p>
+                                <p><%= __("timeUsed", project.totalTimeUsed != null ? moment.duration(project.totalTimeUsed).humanize() : __("noTime") %></p>
                             </div>
                             <div class="icon">
                                 <a class="fa fa-plus" href="/instance/create?project=<%= project.id %>" title="Add an instance!"></a>

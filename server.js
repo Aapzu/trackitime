@@ -10,6 +10,7 @@ var passport = require('passport')
 var session = require("express-session")
 var flash    = require('express-flash')
 var fs = require('fs')
+var i18n = require("i18n-2")
 
 var app = express();
 
@@ -42,8 +43,18 @@ app.use(passport.session()) // persistent login sessions
 
 // Pass moment.js to every template for date formatting
 app.use(function(req, res, next){
-    res.locals.moment = require('moment');
-    next();
+    res.locals.moment = require('moment')
+    res.locals.__ = res.__
+    next()
+})
+
+i18n.expressBind(app, {
+    // setup some locales - other locales default to en silently
+    locales: ['en', 'fi'],
+    // change the cookie name from 'lang' to 'locale'
+    cookieName: 'locale',
+    extension: '.json',
+    directory: './i18n'
 })
 
 require('./routes/index')(app)
